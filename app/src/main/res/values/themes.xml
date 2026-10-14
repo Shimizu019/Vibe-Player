@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Adaptive launcher icon (spec section 4): gold record on espresso, with a
+         monochrome layer for Android 13+ themed icons. -->
+    <color name="ic_launcher_background">#1E1915</color>
+
+    <style name="Theme.VibesPlayer" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/espresso</item>
+    </style>
+
+    <style name="Theme.VibesPlayer.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/espresso</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_record</item>
+        <item name="postSplashScreenTheme">@style/Theme.VibesPlayer</item>
+    </style>
+</resources>
