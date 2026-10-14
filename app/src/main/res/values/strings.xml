@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vibes Player</string>
+
+    <!-- Tabs -->
+    <string name="tab_home">Home</string>
+    <string name="tab_search">Search</string>
+    <string name="tab_library">Library</string>
+
+    <!-- Screen titles -->
+    <string name="home_title">Vibes Player</string>
+    <string name="library_title">Your Library</string>
+    <string name="now_playing">Now playing</string>
+    <string name="recently_played_title">Recently Played</string>
+    <string name="settings_title">Settings</string>
+    <string name="collection_title">Playlist</string>
+
+    <!-- Generic content descriptions -->
+    <string name="cd_more_options_for">More options for %1$s</string>
+    <string name="cd_download_song">Download %1$s</string>
+    <string name="cd_play">Play</string>
+    <string name="cd_pause">Pause</string>
+    <string name="cd_play_pause">Play or pause</string>
+    <string name="cd_skip_previous">Previous</string>
+    <string name="cd_skip_next">Next</string>
+    <string name="cd_shuffle">Shuffle</string>
+    <string name="cd_repeat">Repeat</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_clear">Clear</string>
+    <string name="cd_remove">Remove</string>
+    <string name="cd_bell">Notifications</string>
+    <string name="cd_play_golden_hits">Play Golden Hits</string>
+    <string name="cd_toggle_view">Toggle view</string>
+    <string name="cd_download_collection">Download playlist</string>
+
+    <!-- Song row states -->
+    <string name="state_downloaded">Downloaded</string>
+    <plurals name="state_downloading_percent">
+        <item quantity="one">Downloading %1$d percent</item>
+        <item quantity="other">Downloading %1$d percent</item>
+    </plurals>
+    <string name="state_online_only">Online only</string>
+    <string name="state_queued">Queued</string>
+    <string name="state_download_failed">Download failed</string>
+
+    <!-- Mini player -->
+    <string name="mini_player_a11y">Now playing: %1$s by %2$s. Double tap to open the player.</string>
+    <string name="artwork_for_song">Artwork for %1$s</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Search songs, artists, or albums</string>
+    <string name="recent_searches">Recent Searches</string>
+
+    <!-- Home sections -->
+    <string name="section_explore_eras">Explore Eras</string>
+    <string name="section_recently_played">Recently Played</string>
+    <string name="see_all">See All</string>
+    <string name="view_all">VIEW ALL</string>
+    <string name="era_1950s">1950s</string>
+    <string name="era_1960s">1960s</string>
+    <string name="era_1970s">1970s</string>
+    <string name="era_1980s">1980s</string>
+
+    <!-- Library -->
+    <string name="segment_playlists">Playlists</string>
+    <string name="segment_downloads">Downloads</string>
+    <string name="segment_liked">Liked</string>
+    <string name="local_storage">Local storage</string>
+    <string name="storage_amount">%1$s of %2$s</string>
+    <string name="sort_recent_added">Recent added</string>
+    <string name="sort_name_az">Name (A-Z)</string>
+    <string name="sort_largest_first">Largest first</string>
+    <string name="sort_by">Sort by</string>
+    <plurals name="playlist_meta">
+        <item quantity="one">Playlist • %1$d track</item>
+        <item quantity="other">Playlist • %1$d tracks</item>
+    </plurals>
+    <string name="song_meta_year">%1$s • %2$d</string>
+    <string name="song_meta_online_only">%1$s • Online only</string>
+    <string name="song_meta_size">%1$s • %2$s</string>
+
+    <!-- Section 17: status and offline -->
+    <string name="status_online">Online</string>
+    <string name="status_offline_mode">Offline mode</string>
+    <string name="status_no_connection">No connection</string>
+    <string name="offline_sheet_title">Offline mode</string>
+    <string name="offline_sheet_helper">Only downloaded and on-device songs play.</string>
+    <string name="music_sources">Music sources</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_empty">No notifications yet.</string>
+
+    <!-- Section 17: empty states -->
+    <string name="home_empty_title">No music yet</string>
+    <string name="home_empty_body">Find music on your phone or connect an online source.</string>
+    <string name="find_music_on_this_phone">Find music on this phone</string>
+    <string name="era_empty_title">No songs from the %1$s yet.</string>
+    <string name="era_empty_body">Add music from that era to your phone or server.</string>
+    <string name="recently_played_empty">Songs you play will show up here.</string>
+    <string name="liked_empty_title">No liked songs yet.</string>
+    <string name="liked_empty_body">Open a song\'s menu and choose Add to Liked.</string>
+    <string name="library_empty_title">No playlists yet.</string>
+    <string name="create_playlist">Create playlist</string>
+    <string name="playlist_empty_title">This playlist is empty</string>
+    <string name="playlist_empty_body">Add songs to start listening.</string>
+    <string name="add_songs">Add songs</string>
+    <string name="downloads_empty_title">Nothing is downloaded yet.</string>
+    <string name="downloads_empty_body">Open any playlist and tap the download button.</string>
+    <string name="queue_empty">Nothing in the queue.</string>
+
+    <!-- Section 17: permissions and scan -->
+    <string name="permission_title">Find music on your phone</string>
+    <string name="permission_body">Vibes Player needs access to your audio files to play the music already on this phone. Your files stay on your phone.</string>
+    <string name="continue_label">Continue</string>
+    <string name="not_now">Not now</string>
+    <string name="permission_denied">Allow access to find music on your phone.</string>
+    <string name="allow_access">Allow access</string>
+    <string name="open_settings">Open settings</string>
+    <string name="scan_scanning">Scanning music on this phone…</string>
+    <plurals name="scan_found">
+        <item quantity="one">Found %1$d song.</item>
+        <item quantity="other">Found %1$d songs.</item>
+    </plurals>
+    <string name="scan_none">No music found on this phone.</string>
+
+    <!-- Section 17: search -->
+    <string name="search_no_results">No songs match \"%1$s\". Check the spelling or try an artist\'s name.</string>
+    <string name="offline_search_line_mode">Offline mode is on. Showing songs on this phone and downloads.</string>
+    <string name="offline_search_line_conn">No connection. Showing songs on this phone and downloads.</string>
+
+    <!-- Section 17: downloads -->
+    <string name="downloading_x_of_y">Downloading %1$d of %2$d</string>
+    <string name="cancel">Cancel</string>
+    <string name="downloaded_x">Downloaded %1$s</string>
+    <string name="download_removed">Download removed</string>
+    <string name="download_failed_x">Couldn\'t download %1$s. Check your connection.</string>
+    <string name="try_again">Try again</string>
+    <string name="no_space">Not enough space. Free up space to download this song.</string>
+    <string name="manage_storage">Manage storage</string>
+    <string name="waiting_for_wifi">Waiting for Wi-Fi</string>
+    <string name="download_not_allowed">Download not allowed for this song.</string>
+    <string name="downloads_cancelled">Downloads cancelled</string>
+    <string name="remove_downloads_title">Remove downloads?</string>
+    <string name="remove_downloads_body">Songs from this playlist will no longer play offline. They stay in your library.</string>
+    <string name="remove">Remove</string>
+
+    <!-- Section 17: playback and connection -->
+    <string name="blocked_offline_mode">Turn off Offline mode to play this song.</string>
+    <string name="blocked_no_connection">No connection. Connect to the internet to play this song.</string>
+    <string name="connection_lost">Connection lost. Downloaded songs still play.</string>
+    <string name="play_error">Couldn\'t play this song. Check your connection.</string>
+    <string name="file_missing">This file is no longer on your phone.</string>
+
+    <!-- Section 17: queue, devices, lyrics, liked -->
+    <string name="queue_title">Up next</string>
+    <string name="playing_next">Playing next</string>
+    <string name="added_to_queue">Added to queue</string>
+    <string name="devices_title">Play on</string>
+    <string name="device_this_phone">This phone</string>
+    <string name="lyrics_unavailable">Lyrics aren\'t available for this song.</string>
+    <string name="added_to_liked">Added to Liked</string>
+    <string name="removed_from_liked">Removed from Liked</string>
+
+    <!-- Section 17: playlists and dialogs -->
+    <string name="added_to_playlist">Added to %1$s</string>
+    <string name="already_in_playlist">Already in %1$s</string>
+    <string name="delete_playlist_title">Delete %1$s?</string>
+    <string name="delete_playlist_body">The songs stay in your library.</string>
+    <string name="delete">Delete</string>
+    <string name="rename_playlist">Rename playlist</string>
+    <string name="save">Save</string>
+    <string name="new_playlist">New playlist</string>
+    <string name="playlist_name">Playlist name</string>
+    <string name="create">Create</string>
+    <plurals name="add_n_songs">
+        <item quantity="one">Add %1$d song</item>
+        <item quantity="other">Add %1$d songs</item>
+    </plurals>
+
+    <!-- Section 17: settings and server -->
+    <string name="jamendo_missing">Add a Jamendo client ID to local.properties.</string>
+    <string name="connected">Connected</string>
+    <string name="connection_unencrypted">This connection is not encrypted.</string>
+
+    <!-- Song menu -->
+    <string name="play_next">Play next</string>
+    <string name="add_to_queue">Add to queue</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="add_to_liked">Add to Liked</string>
+    <string name="remove_from_liked">Remove from Liked</string>
+    <string name="download">Download</string>
+    <string name="remove_download">Remove download</string>
+    <string name="remove_from_playlist">Remove from this playlist</string>
+    <string name="share">Share</string>
+    <string name="song_info">Song info</string>
+
+    <!-- Debug components gallery -->
+    <string name="gallery_title">Components gallery</string>
+</resources>
