@@ -2,7 +2,7 @@
 
 An Android music player for songs only — online streaming, offline downloads, and playback of music already stored on your phone. Inspired by Spotify, with a warm espresso-and-gold design.
 
-> **Status:** Planning stage — no code yet. This README captures the project brief.
+> **Status:** Milestone 1 in progress — project scaffolding, Sleeve theme, navigation shell, and §8 shared components are landing commit by commit. Screen content, data, and playback arrive in Milestones 2–6.
 
 ---
 
@@ -32,7 +32,7 @@ All UI text is in English only.
 ## Tech Stack
 
 - **Language / UI:** Kotlin, Jetpack Compose, Material 3 (customized theme)
-- **SDK:** Min SDK 26, targeting the latest stable Android SDK
+- **SDK:** Min SDK 24, target/compile SDK 37 (latest stable; see `docs/ASSUMPTIONS.md` for the minSdk decision)
 - **Playback:** Media3 ExoPlayer + `MediaSessionService` (notification & lock-screen controls)
 - **Data:** Room (database), DataStore (settings)
 - **DI:** Hilt
