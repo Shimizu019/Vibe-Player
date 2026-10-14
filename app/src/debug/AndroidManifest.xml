@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Debug-only additions: the components gallery activity exists in debug builds only,
+    so release builds contain neither the class nor this manifest entry (spec 19.1).
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity
+            android:name=".gallery.ComponentsGalleryActivity"
+            android:exported="true"
+            android:label="@string/gallery_title"
+            android:theme="@style/Theme.VibesPlayer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
