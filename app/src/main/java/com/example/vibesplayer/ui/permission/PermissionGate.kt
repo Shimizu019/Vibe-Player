@@ -66,13 +66,17 @@ fun PermissionGate(
         null -> return
     }
 
+    // resolved == false is only reachable when a permission is required and not yet
+    // granted, so required is non-null here; narrow it for the calls below.
+    val permission = required ?: return
+
     PermissionScreen(
-        permanentlyDenied = permanentlyDenied || !context.canAskAgainFor(required),
+        permanentlyDenied = permanentlyDenied || !context.canAskAgainFor(permission),
         onContinue = {
-            if (permanentlyDenied || !context.canAskAgainFor(required)) {
+            if (permanentlyDenied || !context.canAskAgainFor(permission)) {
                 context.openAppSettings()
             } else {
-                systemLauncher.launch(required)
+                systemLauncher.launch(permission)
             }
         },
         onNotNow = {

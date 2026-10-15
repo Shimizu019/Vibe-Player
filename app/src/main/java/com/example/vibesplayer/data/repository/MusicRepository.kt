@@ -29,7 +29,7 @@ class MusicRepository @Inject constructor(
     fun observeDownloadedSongs(): Flow<List<SongEntity>> = songDao.observeDownloadedSongs()
 
     fun observeRecentlyPlayed(limit: Int = 100): Flow<List<SongEntity>> =
-        map(songDao.observeRecentlyPlayed()) { it.take(limit) }
+        songDao.observeRecentlyPlayed().map { it.take(limit) }
 
     fun observeGoldenHits(): Flow<List<SongEntity>> =
         combine(
