@@ -3,6 +3,7 @@ agp = "9.4.1"
 kotlin = "2.4.21"
 ksp = "2.3.12"
 hilt = "2.60.1"
+hiltNavigationCompose = "1.4.0"
 composeBom = "2026.09.00"
 coreKtx = "1.19.1"
 activity = "1.13.0"
@@ -20,6 +21,9 @@ desugar = "2.1.5"
 junit = "4.13.2"
 mockk = "1.14.11"
 turbine = "1.2.1"
+androidxTestRunner = "1.7.0"
+androidxTestExtJunit = "1.3.0"
+androidxTestCore = "1.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +52,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-android-gradle-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
@@ -58,6 +63,9 @@ desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", ver
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExtJunit" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTestCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

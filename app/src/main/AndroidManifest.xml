@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Spec section 11.2: audio access. READ_MEDIA_AUDIO is API 33+; the legacy
+         permission covers API 24-32 and is capped there so it is not requested on
+         API 33+. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <application
         android:name=".VibesPlayerApp"
         android:allowBackup="false"
