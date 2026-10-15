@@ -105,4 +105,10 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    testImplementation(libs.androidx.room.testing)
+}
+
+// Room schema export (spec section 20.2: export the schema).
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
