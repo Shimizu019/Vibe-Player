@@ -7,14 +7,24 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.coroutines.coroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
 import com.example.vibesplayer.di.IoDispatcher
+
+/** Thrown when the MediaStore query cannot be completed, so no DEVICE rows are touched. */
+class ScanFailureException(message: String) : Exception(message)
 
 /**
  * Runs the MediaStore query on a background dispatcher (spec 11.2): upserts
  * DEVICE rows, deletes rows whose files are gone (their PlaylistSong rows go
  * with them via cascade), and returns the number of songs found.
+ *
+ * Data integrity (spec 14 / regression tests): a null cursor is a failed query,
+ * never an empty library. If the query fails or the scan is cancelled, no upsert
+ * and no stale-record deletion runs, so every previously scanned DEVICE row is
+ * preserved. Stale cleanup happens only after a complete, successful scan.
  */
 @Singleton
 class DeviceMusicScanner @Inject constructor(
@@ -24,18 +34,25 @@ class DeviceMusicScanner @Inject constructor(
 ) {
     suspend fun scan(nowMs: Long): Int = withContext(ioDispatcher) {
         val found = mutableListOf<SongEntity>()
-        context.contentResolver.query(
+        val cursor = context.contentResolver.query(
             MediaScanContract.collectionUri(),
             MediaScanContract.PROJECTION,
             MediaScanContract.SELECTION,
             null,
             null,
-        )?.use { cursor ->
-            while (cursor.moveToNext()) {
-                ensureActive()
-                found.add(MediaScanContract.mapCursorRow(cursor, nowMs))
+        ) ?: throw ScanFailureException("MediaStore audio query returned no cursor")
+
+        cursor.use {
+            while (it.moveToNext()) {
+                // Cancellation throws CancellationException before any DB write,
+                // so the stale-record deletion below is never reached.
+                coroutineContext.ensureActive()
+                found.add(MediaScanContract.mapCursorRow(it, nowMs))
             }
         }
+        // Re-check after iteration: a cancellation that arrived mid-scan must not
+        // proceed to upsert or deletion.
+        coroutineContext.ensureActive()
         songDao.upsertAll(found)
         if (found.isEmpty()) {
             songDao.deleteDeviceSongsNotIn(listOf(NO_MATCH_SENTINEL))
@@ -43,12 +60,6 @@ class DeviceMusicScanner @Inject constructor(
             songDao.deleteDeviceSongsNotIn(found.map { it.remoteId })
         }
         found.size
-    }
-
-    private fun ensureActive() {
-        if (!kotlin.coroutines.coroutineContext.isActive) {
-            throw CancellationException()
-        }
     }
 
     private companion object {

@@ -8,6 +8,7 @@ import android.os.Looper
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -86,10 +87,20 @@ class ScanManager @Inject constructor(
         if (!AudioPermission.isGranted(context)) return
         scanJob = scope.launch {
             _state.value = ScanState.Scanning
-            val now = System.currentTimeMillis()
-            val count = scanner.scan(now)
-            _lastScanMs.value = now
-            _state.value = ScanState.Done(count)
+            try {
+                val now = System.currentTimeMillis()
+                val count = scanner.scan(now)
+                _lastScanMs.value = now
+                _state.value = ScanState.Done(count)
+            } catch (cancelled: CancellationException) {
+                // Cooperative cancel: fall back to Idle and rethrow so the job ends clean.
+                _state.value = ScanState.Idle
+                throw cancelled
+            } catch (failure: Exception) {
+                // Failed query (e.g. no cursor): preserve existing DEVICE rows and
+                // return to Idle so the state never sticks at Scanning.
+                _state.value = ScanState.Idle
+            }
         }
     }
 }

@@ -30,6 +30,9 @@ object MediaScanContract {
         MediaStore.Audio.Media.YEAR,
         MediaStore.Audio.Media.SIZE,
         MediaStore.Audio.Media.DATE_ADDED,
+        // File name, used only when TITLE is missing (spec 11.2). Not the
+        // deprecated DATA column: this is the display name from the metadata.
+        MediaStore.Audio.Media.DISPLAY_NAME,
     )
 
     /** External audio collection URI for this OS version. */
@@ -58,8 +61,12 @@ object MediaScanContract {
         return contentUri.lastPathSegment ?: "Unknown title"
     }
 
-    /** One cursor row to a DEVICE song. Pure function so unit tests cover it. */
-    fun mapRow(
+    /**
+     * Pure mapping: no Android framework calls, so unit tests cover it on the JVM.
+     * The playable [contentUriString] is passed in already built. Title falls back
+     * to the file name without its extension, then to the URI id (spec 11.2).
+     */
+    fun buildSongEntity(
         id: Long,
         cursorTitle: String?,
         artist: String?,
@@ -70,13 +77,12 @@ object MediaScanContract {
         sizeBytes: Long,
         dateAddedSecs: Long,
         displayName: String?,
-        nowMs: Long,
+        contentUriString: String,
     ): SongEntity {
-        val contentUri = contentUriFor(id)
         val title = when {
             !cursorTitle.isNullOrBlank() -> cursorTitle
             !displayName.isNullOrBlank() -> displayName.substringBeforeLast('.', displayName)
-            else -> contentUri.lastPathSegment ?: "Unknown title"
+            else -> contentUriString.substringAfterLast('/').ifEmpty { "Unknown title" }
         }
         return SongEntity(
             origin = SongOrigin.DEVICE,
@@ -90,7 +96,7 @@ object MediaScanContract {
             license = null,
             licenseUrl = null,
             artworkUri = null,
-            contentUri = contentUri.toString(),
+            contentUri = contentUriString,
             downloadStatus = DownloadStatus.NONE,
             downloadProgress = 0,
             localFilePath = null,
@@ -102,6 +108,33 @@ object MediaScanContract {
             lastPlayedAt = null,
         )
     }
+
+    /** Builds the playable URI for the id, then delegates to the pure mapper. */
+    fun mapRow(
+        id: Long,
+        cursorTitle: String?,
+        artist: String?,
+        album: String?,
+        albumId: Long?,
+        durationMs: Long,
+        year: Int,
+        sizeBytes: Long,
+        dateAddedSecs: Long,
+        displayName: String?,
+        nowMs: Long,
+    ): SongEntity = buildSongEntity(
+        id = id,
+        cursorTitle = cursorTitle,
+        artist = artist,
+        album = album,
+        albumId = albumId,
+        durationMs = durationMs,
+        year = year,
+        sizeBytes = sizeBytes,
+        dateAddedSecs = dateAddedSecs,
+        displayName = displayName,
+        contentUriString = contentUriFor(id).toString(),
+    )
 
     /** Reads the current cursor row. Call only with the projection above. */
     fun mapCursorRow(cursor: Cursor, nowMs: Long): SongEntity {

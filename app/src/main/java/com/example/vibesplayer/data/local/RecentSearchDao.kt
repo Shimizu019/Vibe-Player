@@ -17,7 +17,10 @@ interface RecentSearchDao {
     @Query("SELECT * FROM recent_searches ORDER BY searchedAt DESC LIMIT 10")
     fun observeRecentSearches(): Flow<List<RecentSearchEntity>>
 
-    @Query("DELETE FROM recent_searches WHERE searchedAt NOT IN (SELECT searchedAt FROM recent_searches ORDER BY searchedAt DESC LIMIT 10)")
+    @Query(
+        "DELETE FROM recent_searches WHERE rowid NOT IN (" +
+            "SELECT rowid FROM recent_searches ORDER BY searchedAt DESC, rowid DESC LIMIT 10)",
+    )
     suspend fun trimToTen()
 
     @Query("DELETE FROM recent_searches WHERE query = :query COLLATE NOCASE")
