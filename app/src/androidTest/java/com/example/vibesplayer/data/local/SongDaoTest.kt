@@ -84,8 +84,8 @@ class SongDaoTest {
         dao.upsertAll(
             listOf(
                 device(0, "Hello World", "A"),
-                device(0, "Hello", "B"),
-                device(0, "Say Hello", "C"),
+                device(1, "Hello", "B"),
+                device(2, "Say Hello", "C"),
             ),
         )
         val results = dao.searchLocal("hello", 10)
