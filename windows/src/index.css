@@ -1,5 +1,12 @@
 /* ===== VIBES PLAYER — Design System (per docs/VIBES_PLAYER_SPEC.md §7) ===== */
 
+/* Fonts (§7.2) — Fraunces and Instrument Sans from Google Fonts.
+   NOTE: No local font files exist in the repository. Google Fonts CDN is used
+   so the desktop app renders the approved typography. Offline, the browser
+   falls back to generic serif/sans-serif. This limitation is recorded in
+   docs/ASSUMPTIONS.md. */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Instrument+Sans:wght@400;500;600&display=swap');
+
 /* Colors (approved palette — no raw hex in screens) */
 :root {
   /* §7.1 Colors */
@@ -13,13 +20,28 @@
   --color-oxblood: #7A2E2E;  /* hero card background, placeholder artwork */
   --color-disc: #0F0D0B;     /* vinyl disc */
   --color-danger: #E57C6B;   /* destructive actions only (Delete, Remove) */
+  --color-backdrop: #120F0C; /* deeper backdrop layer */
 
   /* Rules: text on Gold uses Espresso. Gold text only on Espresso or Surface. */
   /* Dimmed rows use 50% opacity. No gradients, no shadows, no elevation. */
 
-  /* Typography (§7.2) — fonts loaded locally; see fonts/ */
+  /* Typography (§7.2) */
   --font-heading: 'Fraunces', serif;
   --font-body: 'Instrument Sans', sans-serif;
+
+  /* §7.3 Type scale — px values for desktop (spec lists sp for Android) */
+  --size-title-xl: 32px;   /* titleXL Fraunces SemiBold 32 — Home title, collection title */
+  --size-title-l: 30px;    /* titleL Fraunces SemiBold 30 — Home hero title */
+  --size-title-m: 28px;    /* titleM Fraunces SemiBold 28 — Now Playing song title, screen titles */
+  --size-heading: 22px;    /* heading Fraunces Regular 22 — Explore Eras, Recently Played, etc. */
+  --size-artist-l: 20px;   /* artistL Instrument Sans Regular 20 — artist on Now Playing */
+  --size-row-title: 18px;  /* rowTitle Instrument Sans Medium 18 — song, playlist, album titles */
+  --size-input: 18px;      /* input Instrument Sans Regular 18 — search field text */
+  --size-body: 16px;       /* body Instrument Sans Regular 16 — chips, hero label, status text */
+  --size-body-med: 16px;   /* bodyMed Instrument Sans Medium 16 — buttons, See All */
+  --size-meta: 14px;       /* meta Instrument Sans Regular 14 — song sublines, times, tab labels */
+  --size-label: 14px;      /* label Instrument Sans Medium 14, ALL CAPS, +1.2sp tracking */
+  --size-label-l: 16px;    /* labelL Instrument Sans Medium 16, ALL CAPS, +1.5sp tracking */
 
   /* §7.4 Shapes: only three radii */
   --radius-sm: 4px;
@@ -33,13 +55,18 @@
   --cover-size: 48px;
 
   /* Component sizes */
-  --mini-player-height: 72px;
+  --mini-player-height: 70px;
   --row-height-home: 72px;
   --row-height-collection: 80px;
 
   /* Z-index */
   --z-mini-player: 100;
   --z-tab-bar: 90;
+
+  /* Phone frame */
+  --frame-width: 375px;
+  --frame-height: min(812px, 100dvh - 32px);
+  --frame-radius: 8px;
 }
 
 /* Reset */
@@ -54,13 +81,138 @@ body,
 #root {
   height: 100%;
   width: 100%;
-  background-color: var(--color-espresso);
+  background-color: var(--color-backdrop);
   color: var(--color-sleeve);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Phone frame ===== */
+.phone-frame {
+  width: var(--frame-width);
+  min-height: var(--frame-height);
+  max-height: 100dvh;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-border);
+  border-radius: var(--frame-radius);
+  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  .phone-frame {
+    width: 100%;
+    min-height: 100dvh;
+    height: 100dvh;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+  }
+}
+
+.phone-content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-espresso);
+}
+
+/* ===== Top row ===== */
+.top-row {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--color-espresso);
+}
+
+.top-row .status-text {
+  font-size: 16px;
+  color: var(--color-sand);
+  font-family: var(--font-body);
+}
+
+/* ===== Mini player (inside frame) ===== */
+.mini-player-container {
+  margin: 0 16px 8px 16px;
+  height: 70px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mini-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--color-gold);
+  transform: scaleX(0.38);
+  transform-origin: left;
+}
+
+/* ===== Bottom tab bar (inside frame) ===== */
+.bottom-tab-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 56px;
+  align-items: center;
+  background: var(--color-espresso);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-sand);
+}
+
+.tab-item.active {
+  color: var(--color-gold);
+}
+
+.tab-item svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 24px;
+  height: 24px;
+}
+
+.tab-item.active svg {
+  fill: var(--color-gold);
+  stroke: none;
+}
+
+/* Filled icons (play, pause, skip, house when selected) */
+.filled-icon {
+  fill: currentColor;
+  stroke: none;
+  width: 24px;
+  height: 24px;
 }
 
 a {
@@ -83,12 +235,41 @@ h1, h2, h3, h4 {
   font-weight: 600; /* SemiBold per §7.3 */
 }
 
-label {
-  font-size: 14px;
+/* Section headings: Fraunces Regular 22px, Sleeve/cream color (§7.3) */
+.screen-heading {
+  font-family: var(--font-heading);
+  font-size: var(--size-heading);
+  font-weight: 400; /* Regular per §7.3 */
+  color: var(--color-sleeve);
+  margin: 0 0 16px 0;
+}
+
+/* Label style: ALL CAPS, medium weight, increased tracking (§7.3) */
+.label {
+  font-family: var(--font-body);
+  font-size: var(--size-label);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.075em;
   color: var(--color-sand);
 }
+
+.label-l {
+  font-family: var(--font-body);
+  font-size: var(--size-label-l);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  color: var(--color-sand);
+}
+
+/* Specific type sizes per §7.3 */
+.size-title-xl { font-family: var(--font-heading); font-size: var(--size-title-xl); font-weight: 600; color: var(--color-gold); }
+.size-title-l  { font-family: var(--font-heading); font-size: var(--size-title-l);  font-weight: 600; color: var(--color-gold); }
+.size-title-m  { font-family: var(--font-heading); font-size: var(--size-title-m);  font-weight: 600; color: var(--color-gold); }
+.size-artist-l { font-family: var(--font-body);   font-size: var(--size-artist-l); font-weight: 400; color: var(--color-sleeve); }
+.size-row-title{ font-family: var(--font-body);   font-size: var(--size-row-title);font-weight: 500; color: var(--color-sleeve); }
+.size-meta     { font-family: var(--font-body);   font-size: var(--size-meta);     font-weight: 400; color: var(--color-sand); }
 
 /* ===== Layout ===== */
 .app-shell {
@@ -107,9 +288,35 @@ label {
 
 .screen {
   padding: var(--margin-screen);
-  max-width: 1200px;
-  margin: 0 auto;
   width: 100%;
+}
+
+/* ===== Era chips ===== */
+.era-chip {
+  height: 40px;
+  padding: 0 24px;
+  border-radius: var(--radius-full);
+  background-color: transparent;
+  color: var(--color-sleeve);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.era-chip:hover {
+  background-color: var(--color-surface);
+}
+
+.era-chip.active {
+  background-color: var(--color-gold);
+  color: var(--color-espresso);
+  border: none;
 }
 
 /* ===== Buttons ===== */
@@ -204,4 +411,86 @@ a:focus-visible {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-sand);
+}
+
+/* ===== Letter-tile placeholder (spec §6: no "No Art" text) ===== */
+.letter-tile {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-sleeve);
+  background-color: var(--color-oxblood);
+}
+
+/* Placeholder color variants */
+.letter-tile-oxblood { background-color: var(--color-oxblood); }
+.letter-tile-gold-dim { background-color: #8C6D3F; }
+.letter-tile-espresso-dark { background-color: #4A3B2A; }
+.letter-tile-sand-dim { background-color: #B89A6A; }
+
+/* ===== Icon button (spec: Lucide-style, 24px, 2px stroke, currentColor) ===== */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  color: var(--color-sand);
+  cursor: pointer;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-button:hover {
+  background-color: var(--color-surface);
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.icon-button.gold {
+  color: var(--color-gold);
+}
+
+.icon-button.gold:hover {
+  background-color: var(--color-surface);
+  color: var(--color-gold);
+}
+
+.icon-button.sleeve {
+  color: var(--color-sleeve);
+}
+
+/* ===== Reduced motion (§7.7) ===== */
+@media (prefers-reduced-motion: reduce) {
+  .record-disc,
+  .record-grooves,
+  .record-center,
+  .record-ring {
+    animation: none !important;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
