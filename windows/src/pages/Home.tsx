@@ -3,6 +3,7 @@ import { Song } from '../data/fixtures';
 import { SongRow } from '../components/SongRow';
 import { EraChip } from '../components/EraChip';
 import { SectionHeader } from '../components/SectionHeader';
+import { PlayIcon } from '../components/icons';
 
 interface HomeProps {
   onSongSelect: (song: Song) => void;
@@ -32,14 +33,7 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
 
   return (
     <div className="screen">
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-        <span style={{ fontSize: 14, color: 'var(--color-sand)' }}>Online</span>
-        <button style={{ marginLeft: 'auto', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 8, padding: 8, color: 'var(--color-sand)', cursor: 'pointer' }}>
-          🔔
-        </button>
-      </div>
-
-      <h1 style={{ fontSize: '2rem', marginBottom: 16, color: 'var(--color-gold)' }}>Vibes Player</h1>
+      <h1 className="size-title-xl" style={{ marginBottom: 16 }}>Vibes Player</h1>
 
       {/* Hero card */}
       <div
@@ -54,9 +48,28 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
         }}
       >
         <div style={{ position: 'absolute', top: 24, left: 24, bottom: 24, right: 24, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 8 }}>
-          <span style={{ fontSize: 14, color: 'var(--color-sleeve)' }}>Featured Playlist</span>
-          <h2 style={{ fontSize: '1.5rem', color: 'var(--color-gold)', margin: 0 }}>Golden Hits</h2>
+          <span style={{ fontSize: 16, color: 'var(--color-sand)' }}>Featured Playlist</span>
+          <h2 className="size-title-l" style={{ margin: 0, color: 'var(--color-sleeve)' }}>Golden Hits</h2>
         </div>
+        {/* Faint vinyl record artwork */}
+        <svg
+          style={{
+            position: 'absolute',
+            left: '75%',
+            top: '55%',
+            transform: 'translate(-50%, -50%)',
+            width: 200,
+            height: 200,
+            pointerEvents: 'none',
+          }}
+          viewBox="0 0 200 200"
+        >
+          <circle cx="100" cy="100" r="100" fill="none" stroke="currentColor" strokeWidth={1.5} strokeOpacity={0.12} />
+          <circle cx="100" cy="100" r="75" fill="none" stroke="currentColor" strokeWidth={1.5} strokeOpacity={0.12} />
+          <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" strokeWidth={1.5} strokeOpacity={0.12} />
+          <circle cx="100" cy="100" r="25" fill="none" stroke="currentColor" strokeWidth={1.5} strokeOpacity={0.12} />
+          <circle cx="100" cy="100" r="6" fill="currentColor" fillOpacity={0.12} />
+        </svg>
         <button
           style={{
             position: 'absolute',
@@ -70,13 +83,12 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 24,
-            lineHeight: 1,
             cursor: 'pointer',
           }}
           onClick={() => onSongSelect(goldenHits[0])}
+          title="Play Golden Hits"
         >
-          ▶
+          <PlayIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-espresso)' }} />
         </button>
       </div>
 
@@ -105,7 +117,6 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
                   artist={song.artist}
                   album={song.album}
                   year={song.year}
-                  duration={song.duration}
                   onClick={() => onSongSelect(song)}
                 />
               ))
@@ -128,7 +139,6 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
                 artist={song.artist}
                 album={song.album}
                 year={song.year}
-                duration={song.duration}
                 onClick={() => onSongSelect(song)}
               />
             ))}
