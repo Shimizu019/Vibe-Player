@@ -1,34 +1,48 @@
-/* ===== VIBES PLAYER — Design System (per docs/VIBES_PLAYER_SPEC.md) ===== */
+/* ===== VIBES PLAYER — Design System (per docs/VIBES_PLAYER_SPEC.md §7) ===== */
 
-/* Colors (approved palette) */
+/* Colors (approved palette — no raw hex in screens) */
 :root {
-  --espresso: #2B1E16;
-  --espresso-dark: #1A120E;
-  --gold: #C5A059;
-  --gold-dim: #A88743;
-  --sand: #E6D8CC;
-  --sand-dim: #C9B8A5;
-  --oxblood: #4A1A1B;
-  --border: #3D2E24;
+  /* §7.1 Colors */
+  --color-espresso: #1E1915; /* screen background, tab bar, selected segment */
+  --color-surface: #2A241E;  /* mini player, chips, search field, circle buttons, sheets, dialogs, snackbar */
+  --color-border: #3A3229;   /* 1 dp outlines */
+  --color-divider: #2E2822;  /* list dividers, progress and storage tracks */
+  --color-sleeve: #F1E6CF;   /* primary text and icons, mini player play/pause circle */
+  --color-sand: #D6C8AE;     /* secondary text, inactive controls */
+  --color-gold: #D4A73A;     /* accent: play buttons, progress, selected tab and chip, links, download ring */
+  --color-oxblood: #7A2E2E;  /* hero card background, placeholder artwork */
+  --color-disc: #0F0D0B;     /* vinyl disc */
+  --color-danger: #E57C6B;   /* destructive actions only (Delete, Remove) */
 
-  /* Typography */
+  /* Rules: text on Gold uses Espresso. Gold text only on Espresso or Surface. */
+  /* Dimmed rows use 50% opacity. No gradients, no shadows, no elevation. */
+
+  /* Typography (§7.2) — fonts loaded locally; see fonts/ */
   --font-heading: 'Fraunces', serif;
   --font-body: 'Instrument Sans', sans-serif;
 
-  /* Sizes */
+  /* §7.4 Shapes: only three radii */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-full: 9999px;
-  --margin-screen: 24px;
 
-  /* Mini player */
+  /* §7.5 Spacing (4 dp grid) */
+  --margin-screen: 24px;
+  --gap-block: 32px;
+  --gap-section: 40px;
+  --cover-size: 48px;
+
+  /* Component sizes */
   --mini-player-height: 72px;
+  --row-height-home: 72px;
+  --row-height-collection: 80px;
 
   /* Z-index */
   --z-mini-player: 100;
-  --z-tab-bar: 100;
+  --z-tab-bar: 90;
 }
 
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,8 +54,8 @@ body,
 #root {
   height: 100%;
   width: 100%;
-  background-color: var(--espresso);
-  color: var(--sand);
+  background-color: var(--color-espresso);
+  color: var(--color-sleeve);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
@@ -62,21 +76,18 @@ button {
   color: inherit;
 }
 
+/* Headings use Fraunces, Gold only on Espresso/Surface backgrounds */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  color: var(--gold);
-  font-weight: 700;
+  color: var(--color-gold);
+  font-weight: 600; /* SemiBold per §7.3 */
 }
 
-h1 { font-size: 2.25rem; line-height: 1.2; }
-h2 { font-size: 1.875rem; line-height: 1.25; }
-h3 { font-size: 1.5rem; line-height: 1.3; }
-
 label {
-  font-size: 0.875rem;
+  font-size: 14px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--sand-dim);
+  letter-spacing: 0.075em;
+  color: var(--color-sand);
 }
 
 /* ===== Layout ===== */
@@ -91,7 +102,7 @@ label {
 .app-content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: calc(var(--mini-player-height) + 24px);
+  padding-bottom: calc(var(--mini-player-height) + var(--margin-screen));
 }
 
 .screen {
@@ -109,33 +120,33 @@ label {
   gap: 8px;
   border-radius: var(--radius-full);
   font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-size: 14px;
   transition: all 0.2s ease;
 }
 
 .btn-gold {
-  background-color: var(--gold);
-  color: var(--espresso);
+  background-color: var(--color-gold);
+  color: var(--color-espresso);
   width: 48px;
   height: 48px;
   border-radius: var(--radius-full);
 }
 
 .btn-gold:hover {
-  background-color: var(--gold-dim);
+  background-color: #b88f2e;
 }
 
 .btn-surface {
-  background-color: #3D2E24;
-  color: var(--sand);
+  background-color: var(--color-surface);
+  color: var(--color-sleeve);
   width: 48px;
   height: 48px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
 }
 
 .btn-surface:hover {
-  background-color: #4A3A2E;
+  background-color: #342d26;
 }
 
 .btn-icon {
@@ -148,40 +159,13 @@ label {
 
 .btn-text {
   padding: 8px 16px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background: transparent;
 }
 
 .btn-text:hover {
-  border-color: var(--gold-dim);
-}
-
-/* ===== Skeleton ===== */
-.skeleton {
-  background: linear-gradient(90deg, #3D2E24 25%, #4A3A2E 50%, #3D2E24 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius-md);
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-.skeleton-text {
-  height: 16px;
-  margin-bottom: 12px;
-}
-
-.skeleton-text.short { width: 60%; }
-.skeleton-text.long { width: 100%; }
-
-.skeleton-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
+  border-color: var(--color-gold);
 }
 
 /* ===== Empty State ===== */
@@ -195,7 +179,7 @@ label {
 }
 
 .empty-state p {
-  color: var(--sand-dim);
+  color: var(--color-sand);
   margin-top: 12px;
   max-width: 300px;
 }
@@ -203,7 +187,7 @@ label {
 /* ===== Focus / Accessibility ===== */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }
 
@@ -212,12 +196,12 @@ a:focus-visible {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--espresso-dark);
+  background: var(--color-disc);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--color-border);
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-dim);
+  background: var(--color-sand);
 }

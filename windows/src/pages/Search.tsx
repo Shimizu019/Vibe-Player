@@ -49,14 +49,14 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
               height: 56,
               padding: '0 16px 0 48px',
               borderRadius: 4,
-              border: '1px solid #3D2E24',
-              backgroundColor: '#3D2E24',
-              color: '#E6D8CC',
+              border: '1px solid var(--color-border)',
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-sleeve)',
               fontSize: 16,
               fontFamily: 'inherit',
             }}
           />
-          <div style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#8A7560', fontSize: 24 }}>
+          <div style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-sand)', fontSize: 24 }}>
             🔍
           </div>
           {query && (
@@ -68,7 +68,7 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
                 transform: 'translateY(-50%)',
                 background: 'none',
                 border: 'none',
-                color: '#8A7560',
+                color: 'var(--color-sand)',
                 cursor: 'pointer',
                 fontSize: 18,
               }}
@@ -79,7 +79,7 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
           )}
         </div>
         {query === '' && (
-          <p style={{ marginTop: 8, color: '#8A7560', fontSize: 12 }}>
+          <p style={{ marginTop: 8, color: 'var(--color-sand)', fontSize: 12 }}>
             Type to search your library and online sources.
           </p>
         )}
@@ -87,20 +87,20 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
 
       {query === '' ? (
         <>
-          <div style={{ fontSize: 16, fontWeight: 600, color: '#C5A059', marginBottom: 16 }}>
+          <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-gold)', marginBottom: 16 }}>
             Recent Searches
           </div>
-          <div style={{ color: '#8A7560', fontSize: 14, fontStyle: 'italic' }}>
+          <div style={{ color: 'var(--color-sand)', fontSize: 14, fontStyle: 'italic' }}>
             No recent searches yet.
           </div>
         </>
       ) : filtered.length === 0 ? (
-        <div style={{ color: '#8A7560', fontSize: 14, marginTop: 24 }}>
+        <div style={{ color: 'var(--color-sand)', fontSize: 14, marginTop: 24 }}>
           No songs match "{query}". Check the spelling or try an artist's name.
         </div>
       ) : (
         <>
-          <div style={{ fontSize: 16, fontWeight: 600, color: '#C5A059', marginBottom: 16 }}>
+          <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--color-gold)', marginBottom: 16 }}>
             Songs ({filtered.length})
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>

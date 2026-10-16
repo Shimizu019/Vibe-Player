@@ -30,8 +30,8 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
           width: recordSize,
           height: recordSize,
           borderRadius: '50%',
-          backgroundColor: '#1A120E',
-          border: '1px solid #3D2E24',
+          backgroundColor: 'var(--color-disc)',
+          border: '1px solid var(--color-border)',
           position: 'absolute',
           top: 0,
           left: 0,
@@ -51,7 +51,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
             width: `${(recordSize * percent) / 100}px`,
             height: `${(recordSize * percent) / 100}px`,
             borderRadius: '50%',
-            border: '1px solid #1E1B18',
+            border: '1px solid var(--color-border)',
             transform: 'translate(-50%, -50%)',
             zIndex: 2,
             pointerEvents: 'none',
@@ -64,7 +64,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
           width: centerCoverSize,
           height: centerCoverSize,
           borderRadius: '50%',
-          backgroundColor: coverUrl ? 'transparent' : '#3D2E24',
+          backgroundColor: coverUrl ? 'transparent' : 'var(--color-surface)',
           position: 'absolute',
           top: '50%',
           left: '50%',
@@ -73,7 +73,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
           animation: rotation,
           animationPlayState: isPlaying ? 'running' : 'paused',
           overflow: 'hidden',
-          border: '1px solid #3D2E24',
+          border: '1px solid var(--color-border)',
         }}
       >
         {coverUrl ? (
@@ -87,7 +87,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
             }}
           />
         ) : (
-          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#665544', fontSize: 12 }}>
+          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-sand)', fontSize: 12 }}>
             No Art
           </div>
         )}
@@ -99,7 +99,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
           height: recordSize,
           borderRadius: '50%',
           border: '4px solid transparent',
-          borderTop: `4px solid #C5A059`,
+          borderTop: `4px solid var(--color-gold)`,
           position: 'absolute',
           top: 0,
           left: 0,

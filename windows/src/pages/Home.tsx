@@ -33,29 +33,29 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
   return (
     <div className="screen">
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-        <span style={{ fontSize: 14, color: '#C9B8A5' }}>Online</span>
-        <button style={{ marginLeft: 'auto', background: '#3D2E24', border: '1px solid #4A3A2E', borderRadius: 8, padding: 8, color: '#C9B8A5', cursor: 'pointer' }}>
+        <span style={{ fontSize: 14, color: 'var(--color-sand)' }}>Online</span>
+        <button style={{ marginLeft: 'auto', background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 8, padding: 8, color: 'var(--color-sand)', cursor: 'pointer' }}>
           🔔
         </button>
       </div>
 
-      <h1 style={{ fontSize: '2rem', marginBottom: 16, color: '#C5A059' }}>Vibes Player</h1>
+      <h1 style={{ fontSize: '2rem', marginBottom: 16, color: 'var(--color-gold)' }}>Vibes Player</h1>
 
       {/* Hero card */}
       <div
         style={{
-          backgroundColor: '#4A1A1B',
+          backgroundColor: 'var(--color-oxblood)',
           borderRadius: 4,
           height: 224,
           position: 'relative',
           overflow: 'hidden',
           marginBottom: 40,
-          border: '1px solid #6B3A3A',
+          border: '1px solid var(--color-border)',
         }}
       >
         <div style={{ position: 'absolute', top: 24, left: 24, bottom: 24, right: 24, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 8 }}>
-          <span style={{ fontSize: 14, color: '#E6D8CC' }}>Featured Playlist</span>
-          <h2 style={{ fontSize: '1.5rem', color: '#C5A059', margin: 0 }}>Golden Hits</h2>
+          <span style={{ fontSize: 14, color: 'var(--color-sleeve)' }}>Featured Playlist</span>
+          <h2 style={{ fontSize: '1.5rem', color: 'var(--color-gold)', margin: 0 }}>Golden Hits</h2>
         </div>
         <button
           style={{
@@ -65,8 +65,8 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
             width: 48,
             height: 48,
             borderRadius: '50%',
-            backgroundColor: '#C5A059',
-            color: '#2B1E16',
+            backgroundColor: 'var(--color-gold)',
+            color: 'var(--color-espresso)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -110,7 +110,7 @@ export const Home: React.FC<HomeProps> = ({ onSongSelect }) => {
                 />
               ))
             ) : (
-              <div style={{ gridColumn: '1 / -1', color: '#8A7560', fontSize: 14, padding: 24 }}>
+              <div style={{ gridColumn: '1 / -1', color: 'var(--color-sand)', fontSize: 14, padding: 24 }}>
                 No songs from the {selectedEra} yet.
               </div>
             )}

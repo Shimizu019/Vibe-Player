@@ -31,7 +31,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
           left: 16,
           background: 'none',
           border: 'none',
-          color: '#C9B8A5',
+          color: 'var(--color-sand)',
           fontSize: 20,
           cursor: 'pointer',
         }}
@@ -49,18 +49,18 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
             display: 'inline-block',
             padding: '6px 12px',
             borderRadius: 12,
-            backgroundColor: '#3D2E24',
-            border: '1px solid #4A3A2E',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
             fontSize: 12,
-            color: '#C5A059',
+            color: 'var(--color-gold)',
           }}
         >
           DOWNLOADED
         </span>
       </div>
 
-      <h2 style={{ fontSize: '1.5rem', color: '#E6D8CC', marginBottom: 8 }}>{song.title}</h2>
-      <p style={{ fontSize: '1.125rem', color: '#C9B8A5' }}>{song.artist}</p>
+      <h2 style={{ fontSize: '1.5rem', color: 'var(--color-sleeve)', marginBottom: 8 }}>{song.title}</h2>
+      <p style={{ fontSize: '1.125rem', color: 'var(--color-sand)' }}>{song.artist}</p>
 
       {/* Progress bar */}
       <div style={{ marginTop: 40 }}>
@@ -68,7 +68,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
           style={{
             width: '100%',
             height: 4,
-            backgroundColor: '#3D2E24',
+            backgroundColor: 'var(--color-divider)',
             borderRadius: 2,
             position: 'relative',
             cursor: 'pointer',
@@ -78,12 +78,12 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
             style={{
               width: '35%',
               height: '100%',
-              backgroundColor: '#C5A059',
+              backgroundColor: 'var(--color-gold)',
               borderRadius: 2,
             }}
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#8A7560', marginTop: 8 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--color-sand)', marginTop: 8 }}>
           <span>01:42</span>
           <span>03:42</span>
         </div>
@@ -93,7 +93,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
       <div style={{ marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 32 }}>
         <button
           onClick={onPrev}
-          style={{ color: '#8A7560', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
+          style={{ color: 'var(--color-sand)', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
           title="Previous"
         >
           ⏮
@@ -104,8 +104,8 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
             width: 80,
             height: 80,
             borderRadius: '50%',
-            backgroundColor: '#C5A059',
-            color: '#2B1E16',
+            backgroundColor: 'var(--color-gold)',
+            color: 'var(--color-espresso)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -119,7 +119,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
         </button>
         <button
           onClick={onNext}
-          style={{ color: '#8A7560', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
+          style={{ color: 'var(--color-sand)', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
           title="Next"
         >
           ⏭
@@ -127,7 +127,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
       </div>
 
       {/* Shuffle / Repeat */}
-      <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', gap: 24, color: '#8A7560' }}>
+      <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', gap: 24, color: 'var(--color-sand)' }}>
         <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20 }} title="Shuffle">
           🔀
         </button>

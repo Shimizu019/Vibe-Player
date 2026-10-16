@@ -35,7 +35,7 @@ export const Collection: React.FC<CollectionProps> = ({
         style={{
           background: 'none',
           border: 'none',
-          color: '#C9B8A5',
+          color: 'var(--color-sand)',
           fontSize: 20,
           cursor: 'pointer',
           display: 'inline-flex',
@@ -52,23 +52,23 @@ export const Collection: React.FC<CollectionProps> = ({
           width: 256,
           height: 256,
           borderRadius: 4,
-          backgroundColor: '#3D2E24',
+          backgroundColor: 'var(--color-surface)',
           margin: '0 auto 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#8A7560',
+          color: 'var(--color-sand)',
           fontSize: 14,
-          border: '1px solid #4A3A2E',
+          border: '1px solid var(--color-border)',
         }}
       >
         Cover
       </div>
 
-      <h1 style={{ fontSize: '2rem', color: '#C5A059', textAlign: 'center', marginBottom: 8 }}>
+      <h1 style={{ fontSize: '2rem', color: 'var(--color-gold)', textAlign: 'center', marginBottom: 8 }}>
         {playlistName}
       </h1>
-      <p style={{ textAlign: 'center', color: '#C9B8A5', fontSize: 14, marginBottom: 32 }}>
+      <p style={{ textAlign: 'center', color: 'var(--color-sand)', fontSize: 14, marginBottom: 32 }}>
         {songs.length} songs • {formatDuration(totalDuration)}
       </p>
 
@@ -78,8 +78,8 @@ export const Collection: React.FC<CollectionProps> = ({
             width: 52,
             height: 52,
             borderRadius: '50%',
-            backgroundColor: '#C5A059',
-            color: '#2B1E16',
+            backgroundColor: 'var(--color-gold)',
+            color: 'var(--color-espresso)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -94,9 +94,9 @@ export const Collection: React.FC<CollectionProps> = ({
             width: 52,
             height: 52,
             borderRadius: '50%',
-            backgroundColor: '#3D2E24',
-            color: '#C9B8A5',
-            border: '1px solid #4A3A2E',
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-sleeve)',
+            border: '1px solid var(--color-border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

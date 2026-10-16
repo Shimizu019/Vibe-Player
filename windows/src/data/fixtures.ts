@@ -28,9 +28,9 @@ export const RECENTLY_PLAYED: Song[] = [
 ];
 
 export const PLAYLISTS = [
-  { id: 'p1', name: 'Golden 60s', songCount: 12, totalDurationMs: 2400000, coverColor: '#6B4A2E' },
-  { id: 'p2', name: 'Sunday Jazz', songCount: 8, totalDurationMs: 1800000, coverColor: '#4A5D59' },
-  { id: 'p3', name: 'Vinyl Classics', songCount: 20, totalDurationMs: 4500000, coverColor: '#8B4A4A' },
+  { id: 'p1', name: 'Golden 60s', songCount: 12, totalDurationMs: 2400000 },
+  { id: 'p2', name: 'Sunday Jazz', songCount: 8, totalDurationMs: 1800000 },
+  { id: 'p3', name: 'Vinyl Classics', songCount: 20, totalDurationMs: 4500000 },
 ];
 
 export const ERAS = ['1950s', '1960s', '1970s', '1980s'];

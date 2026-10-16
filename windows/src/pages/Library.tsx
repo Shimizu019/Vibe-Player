@@ -41,8 +41,8 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
     <div className="screen">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         <div>
-          <h2 style={{ fontSize: '1.75rem', color: '#C5A059', marginBottom: 8 }}>Playlists</h2>
-          <p style={{ color: '#C9B8A5', fontSize: 14 }}>{playlists.length} playlists in your library</p>
+          <h2 style={{ fontSize: '1.375rem', color: 'var(--color-gold)', marginBottom: 8 }}>Playlists</h2>
+          <p style={{ color: 'var(--color-sand)', fontSize: 14 }}>{playlists.length} playlists in your library</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
@@ -50,18 +50,18 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
             <div
               key={pl.id}
               style={{
-                backgroundColor: '#3D2E24',
-                border: '1px solid #4A3A2E',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
                 borderRadius: 4,
                 padding: 20,
                 cursor: 'pointer',
                 transition: 'border-color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#C5A059')}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#4A3A2E')}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-gold)')}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--color-border)')}
             >
-              <h3 style={{ fontSize: '1.125rem', color: '#E6D8CC', marginBottom: 8 }}>{pl.name}</h3>
-              <div style={{ color: '#8A7560', fontSize: 13 }}>
+              <h3 style={{ fontSize: '1.125rem', color: 'var(--color-sleeve)', marginBottom: 8 }}>{pl.name}</h3>
+              <div style={{ color: 'var(--color-sand)', fontSize: 13 }}>
                 {pl.songCount} songs • {formatDuration(pl.totalDurationMs)}
               </div>
             </div>
@@ -69,7 +69,7 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
         </div>
 
         <div>
-          <h2 style={{ fontSize: '1.75rem', color: '#C5A059', marginBottom: 16 }}>All Songs</h2>
+          <h2 style={{ fontSize: '1.375rem', color: 'var(--color-gold)', marginBottom: 16 }}>All Songs</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {allSongs.map((song) => (
               <SongRow

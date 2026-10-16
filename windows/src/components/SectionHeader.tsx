@@ -13,14 +13,14 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-      <h3 style={{ fontSize: '1.25rem', color: '#C5A059' }}>{title}</h3>
+      <h3 style={{ fontSize: '1.375rem', color: 'var(--color-gold)' }}>{title}</h3>
       {onSeeAll && (
         <button
           onClick={onSeeAll}
           style={{
             background: 'none',
             border: 'none',
-            color: '#C9B8A5',
+            color: 'var(--color-sand)',
             fontSize: 14,
             cursor: 'pointer',
             textDecoration: 'underline',
