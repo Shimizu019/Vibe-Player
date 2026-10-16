@@ -41,7 +41,7 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
     <div className="screen">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
         <div>
-          <h2 style={{ fontSize: '1.375rem', color: 'var(--color-gold)', marginBottom: 8 }}>Playlists</h2>
+          <h3 className="screen-heading" style={{ marginBottom: 8 }}>Playlists</h3>
           <p style={{ color: 'var(--color-sand)', fontSize: 14 }}>{playlists.length} playlists in your library</p>
         </div>
 
@@ -69,7 +69,7 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
         </div>
 
         <div>
-          <h2 style={{ fontSize: '1.375rem', color: 'var(--color-gold)', marginBottom: 16 }}>All Songs</h2>
+          <h3 className="screen-heading" style={{ marginBottom: 16 }}>All Songs</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {allSongs.map((song) => (
               <SongRow
@@ -78,7 +78,6 @@ export const Library: React.FC<LibraryProps> = ({ onSongSelect }) => {
                 artist={song.artist}
                 album={song.album}
                 year={song.year}
-                duration={song.duration}
                 onClick={() => onSongSelect(song)}
               />
             ))}
