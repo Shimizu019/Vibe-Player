@@ -1,4 +1,5 @@
 import React from 'react';
+import { SkipBackIcon, SkipForwardIcon, PlayIcon, PauseIcon } from './icons';
 
 interface MiniPlayerProps {
   isPlaying: boolean;
@@ -21,24 +22,10 @@ export const MiniPlayer: React.FC<MiniPlayerProps> = ({
   onNext,
   onOpenNowPlaying,
 }) => {
+  const coverPlaceholder = title.charAt(0).toUpperCase();
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 72,
-        backgroundColor: 'var(--color-surface)',
-        borderTop: '1px solid var(--color-border)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 24px',
-        zIndex: 100,
-        gap: 16,
-      }}
-    >
+    <div className="mini-player-container">
+      <div className="mini-progress" />
       <button
         onClick={onOpenNowPlaying}
         style={{
@@ -51,10 +38,9 @@ export const MiniPlayer: React.FC<MiniPlayerProps> = ({
       >
         <div
           style={{
-            width: 48,
-            height: 48,
+            width: 40,
+            height: 40,
             borderRadius: 4,
-            backgroundColor: coverUrl ? 'transparent' : 'var(--color-surface)',
             flexShrink: 0,
             overflow: 'hidden',
             border: '1px solid var(--color-border)',
@@ -63,47 +49,66 @@ export const MiniPlayer: React.FC<MiniPlayerProps> = ({
           {coverUrl ? (
             <img src={coverUrl} alt="Cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           ) : (
-            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-sand)', fontSize: 10 }}>No Art</div>
+            <div className="letter-tile letter-tile-espresso-dark">{coverPlaceholder}</div>
           )}
         </div>
         <div style={{ minWidth: 0 }}>
-          <div style={{ fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
-          <div style={{ fontSize: 12, color: 'var(--color-sand)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{artist}</div>
+          <div
+            className="size-row-title"
+            style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+          >
+            {title}
+          </div>
+          <div
+            style={{
+              fontSize: 'var(--size-meta)',
+              color: 'var(--color-sand)',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {artist}
+          </div>
         </div>
       </button>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <button
           onClick={onPrev}
-          style={{ color: 'var(--color-sand)', fontSize: 20, padding: 4 }}
+          style={{ width: 48, height: 48 }}
           title="Previous"
         >
-          ⏮
+          <SkipBackIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-sand)' }} />
         </button>
         <button
           onClick={onPlayPause}
           style={{
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
             borderRadius: '50%',
-            backgroundColor: 'var(--color-gold)',
+            backgroundColor: 'var(--color-sleeve)',
             color: 'var(--color-espresso)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 24,
-            lineHeight: 1,
+            cursor: 'pointer',
           }}
           title={isPlaying ? 'Pause' : 'Play'}
         >
-          {isPlaying ? '⏸' : '▶'}
+          {isPlaying ? (
+            <PauseIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-espresso)' }} />
+          ) : (
+            <PlayIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-espresso)' }} />
+          )}
         </button>
         <button
           onClick={onNext}
-          style={{ color: 'var(--color-sand)', fontSize: 20, padding: 4 }}
+          className="icon-button sleeve"
+          style={{ width: 48, height: 48 }}
           title="Next"
         >
-          ⏭
+          <SkipForwardIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-sand)' }} />
         </button>
       </div>
     </div>
