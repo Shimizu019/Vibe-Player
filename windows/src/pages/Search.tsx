@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Song } from '../data/fixtures';
 import { SongRow } from '../components/SongRow';
+import { SearchIcon, CircleXIcon } from '../components/icons';
 
 interface SearchProps {
   onSongSelect: (song: Song) => void;
@@ -56,8 +57,8 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
               fontFamily: 'inherit',
             }}
           />
-          <div style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-sand)', fontSize: 24 }}>
-            🔍
+          <div style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: 'var(--color-sand)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24 }}>
+            <SearchIcon style={{ fill: 'currentColor', stroke: 'none', color: 'var(--color-sand)' }} />
           </div>
           {query && (
             <button
@@ -70,11 +71,13 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
                 border: 'none',
                 color: 'var(--color-sand)',
                 cursor: 'pointer',
-                fontSize: 18,
+                padding: 4,
               }}
               onClick={() => setQuery('')}
             >
-              ✕
+              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 20, height: 20, color: 'var(--color-sand)' }}>
+                <CircleXIcon style={{ fill: 'currentColor', stroke: 'none' }} />
+              </span>
             </button>
           )}
         </div>
@@ -111,7 +114,6 @@ export const Search: React.FC<SearchProps> = ({ onSongSelect }) => {
                 artist={song.artist}
                 album={song.album}
                 year={song.year}
-                duration={song.duration}
                 onClick={() => onSongSelect(song)}
               />
             ))}
