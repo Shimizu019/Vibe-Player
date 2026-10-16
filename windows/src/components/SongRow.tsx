@@ -1,11 +1,11 @@
 import React from 'react';
+import { EllipsisVerticalIcon } from './icons';
 
 interface SongRowProps {
   title: string;
   artist: string;
   album?: string;
   year?: number;
-  duration?: number;
   onClick?: () => void;
   isSelected?: boolean;
 }
@@ -15,13 +15,11 @@ export const SongRow: React.FC<SongRowProps> = ({
   artist,
   album,
   year,
-  duration,
   onClick,
   isSelected = false,
 }) => {
-  const durationStr = duration
-    ? new Date(duration).toISOString().substr(14, 5)
-    : '--:--';
+  const coverPlaceholder = title.charAt(0).toUpperCase();
+  const subline = [artist, album, year].filter(Boolean).join(' • ');
 
   return (
     <button
@@ -36,6 +34,7 @@ export const SongRow: React.FC<SongRowProps> = ({
         backgroundColor: isSelected ? 'var(--color-surface)' : 'transparent',
         border: '1px solid transparent',
         width: '100%',
+        height: 72,
         textAlign: 'left',
         color: isSelected ? 'var(--color-gold)' : 'var(--color-sleeve)',
         transition: 'all 0.2s ease',
@@ -51,16 +50,23 @@ export const SongRow: React.FC<SongRowProps> = ({
         }
       }}
     >
-      <div style={{ width: 48, height: 48, borderRadius: 4, backgroundColor: 'var(--color-surface)', flexShrink: 0 }} />
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
-        <div style={{ fontSize: 12, color: 'var(--color-sand)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {artist}
-          {album ? ` • ${album}` : ''}
-          {year ? ` • ${year}` : ''}
-        </div>
+      <div style={{ width: 48, height: 48, borderRadius: 4, flexShrink: 0 }}>
+        <div className="letter-tile letter-tile-oxblood">{coverPlaceholder}</div>
       </div>
-      <div style={{ fontSize: 12, color: 'var(--color-sand)', whiteSpace: 'nowrap' }}>{durationStr}</div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="size-row-title" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
+        <div style={{ fontSize: 'var(--size-meta)', color: 'var(--color-sand)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{subline}</div>
+      </div>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+        className="icon-button sleeve"
+        style={{ width: 48, height: 48, flexShrink: 0 }}
+        title="More options"
+      >
+        <EllipsisVerticalIcon />
+      </button>
     </button>
   );
 };
