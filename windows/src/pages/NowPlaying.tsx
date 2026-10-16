@@ -1,6 +1,7 @@
 import React from 'react';
 import { Song } from '../data/fixtures';
 import { RecordPlayer } from '../components/RecordPlayer';
+import { SkipBackIcon, SkipForwardIcon, PlayIcon, PauseIcon, ShuffleIcon, RepeatIcon, ChevronDownIcon } from '../components/icons';
 
 interface NowPlayingProps {
   song: Song | null;
@@ -24,19 +25,17 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
   return (
     <div style={{ padding: 24, maxWidth: 500, margin: '0 auto', textAlign: 'center' }}>
       <button
+        className="icon-button sleeve"
         onClick={onClose}
         style={{
           position: 'absolute',
           top: 16,
           left: 16,
-          background: 'none',
-          border: 'none',
-          color: 'var(--color-sand)',
-          fontSize: 20,
-          cursor: 'pointer',
+          padding: 4,
         }}
+        title="Close"
       >
-        ⌄
+        <ChevronDownIcon />
       </button>
 
       <div style={{ marginTop: 40 }}>
@@ -59,8 +58,8 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
         </span>
       </div>
 
-      <h2 style={{ fontSize: '1.5rem', color: 'var(--color-sleeve)', marginBottom: 8 }}>{song.title}</h2>
-      <p style={{ fontSize: '1.125rem', color: 'var(--color-sand)' }}>{song.artist}</p>
+      <h2 className="size-title-m" style={{ marginBottom: 8 }}>{song.title}</h2>
+      <p className="size-artist-l">{song.artist}</p>
 
       {/* Progress bar */}
       <div style={{ marginTop: 40 }}>
@@ -83,7 +82,7 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
             }}
           />
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--color-sand)', marginTop: 8 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--size-meta)', color: 'var(--color-sand)', marginTop: 8 }}>
           <span>01:42</span>
           <span>03:42</span>
         </div>
@@ -91,48 +90,24 @@ export const NowPlaying: React.FC<NowPlayingProps> = ({
 
       {/* Controls */}
       <div style={{ marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 32 }}>
-        <button
-          onClick={onPrev}
-          style={{ color: 'var(--color-sand)', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
-          title="Previous"
-        >
-          ⏮
+        <button className="icon-button sleeve" onClick={onPrev} title="Previous">
+          <SkipBackIcon />
         </button>
-        <button
-          onClick={onPlayPause}
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: '50%',
-            backgroundColor: 'var(--color-gold)',
-            color: 'var(--color-espresso)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 36,
-            lineHeight: 1,
-            cursor: 'pointer',
-          }}
-          title={isPlaying ? 'Pause' : 'Play'}
-        >
-          {isPlaying ? '⏸' : '▶'}
+        <button className="icon-button gold" onClick={onPlayPause} title={isPlaying ? 'Pause' : 'Play'}>
+          {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
-        <button
-          onClick={onNext}
-          style={{ color: 'var(--color-sand)', fontSize: 24, background: 'none', border: 'none', cursor: 'pointer' }}
-          title="Next"
-        >
-          ⏭
+        <button className="icon-button sleeve" onClick={onNext} title="Next">
+          <SkipForwardIcon />
         </button>
       </div>
 
       {/* Shuffle / Repeat */}
       <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', gap: 24, color: 'var(--color-sand)' }}>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20 }} title="Shuffle">
-          🔀
+        <button className="icon-button sleeve" style={{ width: 40, height: 40 }} title="Shuffle">
+          <ShuffleIcon />
         </button>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20 }} title="Repeat">
-          🔁
+        <button className="icon-button sleeve" style={{ width: 40, height: 40 }} title="Repeat">
+          <RepeatIcon />
         </button>
       </div>
     </div>
