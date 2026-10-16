@@ -13,6 +13,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
 }) => {
   const recordSize = width;
   const centerCoverSize = recordSize * 0.43;
+  const coverPlaceholder = coverUrl ? '' : '?';
   const rotation = isPlaying ? 'rotate 3.6s linear infinite' : 'none';
 
   return (
@@ -26,6 +27,7 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
     >
       {/* Disc */}
       <div
+        className="record-disc"
         style={{
           width: recordSize,
           height: recordSize,
@@ -41,25 +43,27 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
         }}
       />
       {/* Grooves */}
-      {[84, 66, 50].map((percent) => (
-        <div
-          key={percent}
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            width: `${(recordSize * percent) / 100}px`,
-            height: `${(recordSize * percent) / 100}px`,
-            borderRadius: '50%',
-            border: '1px solid var(--color-border)',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
-      ))}
+      <div className="record-grooves">
+        {[84, 66, 50].map((percent) => (
+          <div
+            key={percent}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: `${(recordSize * percent) / 100}px`,
+              height: `${(recordSize * percent) / 100}px`,
+              borderRadius: '50%',
+              border: '1px solid var(--color-border)',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 2,
+              pointerEvents: 'none',
+            }}
+          />
+        ))}
+      </div>
       {/* Center cover */}
-      <div
+      <div className="record-center"
         style={{
           width: centerCoverSize,
           height: centerCoverSize,
@@ -87,13 +91,11 @@ export const RecordPlayer: React.FC<RecordPlayerProps> = ({
             }}
           />
         ) : (
-          <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-sand)', fontSize: 12 }}>
-            No Art
-          </div>
+          <div className="letter-tile letter-tile-sand-dim">{coverUrl ? '' : coverPlaceholder}</div>
         )}
       </div>
       {/* Gold ring */}
-      <div
+      <div className="record-ring"
         style={{
           width: recordSize,
           height: recordSize,
